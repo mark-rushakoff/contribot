@@ -47,3 +47,6 @@ gem "email_spec", ">= 1.4.0", :group => :test
 gem "fabrication", ">= 2.3.0", :group => [:development, :test]
 gem "bootstrap-sass", ">= 2.3.0.0"
 gem "simple_form", ">= 2.1.0"
+gem "quiet_assets", ">= 1.0.2", :group => :development
+gem "better_errors", ">= 0.7.2", :group => :development
+gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
