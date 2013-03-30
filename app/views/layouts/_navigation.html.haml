@@ -1,1 +1,13 @@
 = link_to "Contribot", root_path, :class => 'brand'
+
+%ul.nav.pull-right
+  - if github_authenticated?
+    %li
+      %p.navbar-text
+        Logged in as
+        = github_user.login
+    %li
+      = link_to "Log out", logout_path
+  - else
+    %li
+      = link_to "Log in with GitHub", login_path
