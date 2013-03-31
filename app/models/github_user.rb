@@ -3,6 +3,8 @@ class GithubUser < ActiveRecord::Base
 
   validates :login, uniqueness: true
 
+  default_scope order('login ASC')
+
   class << self
     def add_approved!(login)
       user = find_or_create_by_login(login)

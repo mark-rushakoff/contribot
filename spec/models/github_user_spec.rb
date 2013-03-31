@@ -38,11 +38,12 @@ describe GithubUser do
   end
 
   describe '.all_approved' do
-    it 'returns a list of all the approved logins' do
-      %w(u1 u2 u3).each { |u| GithubUser.add_approved!(u) }
-      GithubUser.unapprove!('u3')
+    it 'returns a list of all the approved logins, alphabetically' do
+      # don't care about differing case
+      %w(mmm aaa zzz eee).each { |u| GithubUser.add_approved!(u) }
+      GithubUser.unapprove!('eee')
 
-      expect(GithubUser.all_approved).to match_array(%w(u1 u2))
+      expect(GithubUser.all_approved).to eq(%w(aaa mmm zzz))
     end
   end
 
