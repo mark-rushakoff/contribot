@@ -78,4 +78,15 @@ describe GithubUser do
       expect(GithubUser.all_admins).to match_array(%w(u1 u2))
     end
   end
+
+  describe '.all_approved_and_admin' do
+    it 'returns a list of all the approved and admin logins, alphabetically' do
+      %w(mmm aaa zzz eee).each { |u| GithubUser.add_approved!(u) }
+      %w(nnn yyy bbb).each { |u| GithubUser.add_admin!(u) }
+      GithubUser.unapprove!('eee')
+      GithubUser.remove_admin!('nnn')
+
+      expect(GithubUser.all_approved_and_admin).to eq(%w(aaa bbb mmm yyy zzz))
+    end
+  end
 end

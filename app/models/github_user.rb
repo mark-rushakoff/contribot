@@ -39,5 +39,11 @@ class GithubUser < ActiveRecord::Base
     def all_admins
       where(admin: true).pluck(:login)
     end
+
+    def all_approved_and_admin
+      # http://stackoverflow.com/a/13754977
+      all = arel_table
+      where(all[:admin].eq(true).or(all[:approved].eq(true))).pluck(:login)
+    end
   end
 end
