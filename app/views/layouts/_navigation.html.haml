@@ -6,7 +6,7 @@
       %p.navbar-text
         Logged in as
         = github_user.login
-        = " (Admin)" if AdminGithubUser.is_admin?(github_user)
+        = " (Admin)" if GithubUser.find_by_login(github_user.login).try(:admin?)
     %li
       = link_to "Log out", logout_path
   - else

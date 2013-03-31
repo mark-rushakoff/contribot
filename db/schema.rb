@@ -11,22 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331152757) do
+ActiveRecord::Schema.define(:version => 20130331155058) do
 
-  create_table "admin_github_users", :force => true do |t|
+  create_table "github_users", :force => true do |t|
     t.string   "login"
+    t.boolean  "admin"
+    t.boolean  "approved"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "admin_github_users", ["login"], :name => "index_admin_github_users_on_login", :unique => true
-
-  create_table "approved_github_users", :force => true do |t|
-    t.string   "login"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "approved_github_users", ["login"], :name => "index_approved_github_users_on_login", :unique => true
+  add_index "github_users", ["login"], :name => "index_github_users_on_login", :unique => true
 
 end
