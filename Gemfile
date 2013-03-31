@@ -22,3 +22,4 @@ gem "better_errors", ">= 0.7.2", :group => :development
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
 gem "warden-github-rails", "~> 0.0.1"
 gem "figaro", "~> 0.6.3"
+gem "shoulda", "~> 3.4.0", :group => [:development, :test]
