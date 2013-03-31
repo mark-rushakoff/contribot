@@ -1,0 +1,5 @@
+%ul
+  - @approved_users.each do |name, link|
+    %li
+      %a{href: link}
+        = name
