@@ -8,7 +8,8 @@ namespace :admin do
 
   desc "Remove the given GitHub login from site admins"
   task :remove, [:login] => :environment do |t, args|
-    AdminGithubUser.remove_admin!(args[:login])
+    login = args[:login]
+    AdminGithubUser.remove_admin!(login)
     puts "Successfully removed #{login} from admins"
   end
 
