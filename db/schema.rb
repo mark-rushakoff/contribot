@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331155058) do
+ActiveRecord::Schema.define(:version => 20130401061829) do
 
   create_table "github_users", :force => true do |t|
     t.string   "login"
@@ -22,5 +22,14 @@ ActiveRecord::Schema.define(:version => 20130331155058) do
   end
 
   add_index "github_users", ["login"], :name => "index_github_users_on_login", :unique => true
+
+  create_table "watched_repos", :force => true do |t|
+    t.string   "owner"
+    t.string   "repo_name"
+    t.string   "event"
+    t.string   "secret"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

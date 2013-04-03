@@ -13,6 +13,7 @@ The [figaro gem](https://github.com/laserlemon/figaro) is included, so you can s
 # config/application.yml
 CONTRIBOT_GITHUB_CLIENT_ID: 'some_id'
 CONTRIBOT_GITHUB_CLIENT_SECRET: 'some_secret'
+CONTRIBOT_HOST: 'contribot.example.com'
 ```
 
 For this app to be useful, you need to set some GitHub users as administrators.
