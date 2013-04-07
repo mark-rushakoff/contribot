@@ -2,6 +2,10 @@
 
 ## Getting Started
 
+Create a user to actually create comments.
+If your user was octocat, run `rake token:generate[octocat]` (you will be prompted for octocat's password).
+This will generate and display a token that is needed so that the app can comment on behalf of that user.
+
 [Register an application on GitHub](https://github.com/settings/applications/new).
 For development, you can set both the URL and callback URL to (e.g.) `http://localhost:3001`.
 
@@ -14,6 +18,8 @@ The [figaro gem](https://github.com/laserlemon/figaro) is included, so you can s
 CONTRIBOT_GITHUB_CLIENT_ID: 'some_id'
 CONTRIBOT_GITHUB_CLIENT_SECRET: 'some_secret'
 CONTRIBOT_HOST: 'contribot.example.com'
+CONTRIBOT_BOT_NAME: 'octocat'
+CONTRIBOT_BOT_TOKEN: 'some_token'
 ```
 
 For this app to be useful, you need to set some GitHub users as administrators.
