@@ -1,5 +1,3 @@
-require 'io/console'
-
 namespace :token do
   desc "Generate an OAuth2 token for the given username (you will be prompted for the password)"
   task :generate, [:username] => :environment do |t, args|
@@ -17,6 +15,7 @@ namespace :token do
   end
 
   def build_client(username)
+    require 'io/console'
     puts "Enter the password for #{username} (input will be hidden until you hit enter)"
     Octokit::Client.new(login: username, password: $stdin.noecho(&:gets).chomp)
   end
