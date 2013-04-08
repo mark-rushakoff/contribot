@@ -18,5 +18,15 @@ class WatchedRepo < ActiveRecord::Base
         raise "Error subscribing to repo hook"
       end
     end
+
+    def stop_watching_pull_requests!(owner, repo_name)
+      repo = WatchedRepo.find_by_owner_and_repo_name(owner, repo_name)
+
+      if RepoHookSubscriber.unsubscribe(repo)
+        repo.delete
+      else
+        raise "Error unsubscribing from repo hook"
+      end
+    end
   end
 end

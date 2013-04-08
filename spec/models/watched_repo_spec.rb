@@ -40,4 +40,28 @@ describe WatchedRepo do
       }.to raise_error
     end
   end
+
+  describe '.stop_watching_pull_requests!' do
+    let(:repo) { Fabricate(:watched_repo, owner: 'octocat', repo_name: 'foobar') }
+
+    it 'makes a proper request to GitHub and deletes the record' do
+      RepoHookSubscriber.should_receive(:unsubscribe).with(repo) do |repo|
+        repo.should_receive(:delete)
+        true
+      end
+
+      WatchedRepo.stop_watching_pull_requests!('octocat', 'foobar')
+    end
+
+    it 'raises if the subscription attempt fails' do
+      RepoHookSubscriber.should_receive(:unsubscribe).with(repo) do |repo|
+        repo.should_not_receive(:delete)
+        false
+      end
+
+      expect {
+        WatchedRepo.stop_watching_pull_requests!('octocat', 'foobar')
+      }.to raise_error
+    end
+  end
 end
