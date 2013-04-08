@@ -4,7 +4,7 @@ describe RepoHookSubscriber do
   describe '.subscribe' do
     it 'makes the right request' do
       repo = double(owner: 'octocat', repo_name: 'foobar', event: 'pull_request', secret: 'a_hex_string')
-      ENV.stub(:[]).with('CONTRIBOT_GITHUB_OAUTH2_TOKEN').and_return('a_token')
+      ENV.stub(:[]).with('CONTRIBOT_BOT_TOKEN').and_return('a_token')
 
       callback_url = 'http://example.com/callback'
       stubbed_request = stub_request(:post, "https://api.github.com/hub?access_token=a_token").
@@ -19,7 +19,7 @@ describe RepoHookSubscriber do
     it 'returns false on a failed request' do
       $stderr.stub(:puts) # suppress error output for this spec
       repo = double(owner: 'octocat', repo_name: 'foobar', event: 'pull_request', secret: 'a_hex_string')
-      ENV.stub(:[]).with('CONTRIBOT_GITHUB_OAUTH2_TOKEN').and_return('a_token')
+      ENV.stub(:[]).with('CONTRIBOT_BOT_TOKEN').and_return('a_token')
 
       callback_url = 'http://example.com/callback'
       stubbed_request = stub_request(:post, "https://api.github.com/hub?access_token=a_token").

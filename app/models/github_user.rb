@@ -45,5 +45,12 @@ class GithubUser < ActiveRecord::Base
       all = arel_table
       where(all[:admin].eq(true).or(all[:approved].eq(true))).pluck(:login)
     end
+
+    def approved?(login)
+      user = find_by_login(login)
+      return false if user.nil?
+
+      user.approved? || user.admin?
+    end
   end
 end

@@ -6,6 +6,7 @@ namespace :repo do
     raise "Must set ENV['CONTRIBOT_HOST']" if default_host.blank?
     default_url_options[:host] = default_host
     owner, repo_name = args[:owner_and_repo].split('/')
-    WatchedRepo.watch_pull_requests!(owner, repo_name, root_url)
+    WatchedRepo.watch_pull_requests!(owner, repo_name, pull_request_hook_url)
+    puts "Now watching pull requests for #{args[:owner_and_repo]}"
   end
 end

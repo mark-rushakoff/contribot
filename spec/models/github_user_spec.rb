@@ -89,4 +89,20 @@ describe GithubUser do
       expect(GithubUser.all_approved_and_admin).to eq(%w(aaa bbb mmm yyy zzz))
     end
   end
+
+  describe '.approved?' do
+    it 'is true for an admin' do
+      GithubUser.add_admin!('somebody')
+      expect(GithubUser.approved?('somebody')).to eq(true)
+    end
+
+    it 'is true for an approved user' do
+      GithubUser.add_approved!('somebody')
+      expect(GithubUser.approved?('somebody')).to eq(true)
+    end
+
+    it 'is false for a missing user' do
+      expect(GithubUser.approved?('somebody')).to eq(false)
+    end
+  end
 end

@@ -22,6 +22,9 @@ CONTRIBOT_BOT_NAME: 'octocat'
 CONTRIBOT_BOT_TOKEN: 'some_token'
 ```
 
+Configure your application to watch a repository by running e.g. `rake repo:watch[octocat/foobar]`.
+If you receive an error message about "No repository found for this hub.topic", that means that the user in CONTRIBOT_BOT_NAME is not a collaborator on that repository.
+
 For this app to be useful, you need to set some GitHub users as administrators.
 From the command line, you can run:
 
