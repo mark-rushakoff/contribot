@@ -11,7 +11,7 @@ namespace :repo do
   end
 
   desc "Stop watching the repo (given in form of 'owner/project') for pull requests"
-  task :watch, [:owner_and_repo] => :environment do |t, args|
+  task :stop_watching, [:owner_and_repo] => :environment do |t, args|
     include Rails.application.routes.url_helpers
     owner, repo_name = args[:owner_and_repo].split('/')
     WatchedRepo.stop_watching_pull_requests!(owner, repo_name)
