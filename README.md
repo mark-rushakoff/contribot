@@ -1,5 +1,7 @@
 # Contribot
 
+[![Build Status](https://travis-ci.org/mark-rushakoff/contribot.png)](https://travis-ci.org/mark-rushakoff/contribot)
+
 ## Getting Started
 
 Create a user to actually create comments.
