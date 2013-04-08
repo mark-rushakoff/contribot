@@ -7,14 +7,14 @@ describe PullRequestHookController do
     it 'comments with ok to pull when the user is approved' do
       GithubUser.should_receive(:approved?).with('mark-rushakoff').and_return(true)
       PullRequestCommenter.should_receive(:comment_approved).with(repo: "mark-rushakoff/contribot-sandbox", issue_id: 1, pull_requester: 'mark-rushakoff')
-      post :create, payload: new_pull_request_json
+      post :create, owner: 'mark-rushakoff', repo_name: 'contribot-sandbox', payload: new_pull_request_json
       response.should be_success
     end
 
     it 'comments with signature needed when the user is approved' do
       GithubUser.should_receive(:approved?).with('mark-rushakoff').and_return(false)
       PullRequestCommenter.should_receive(:comment_needs_approval).with(repo: "mark-rushakoff/contribot-sandbox", issue_id: 1, pull_requester: 'mark-rushakoff')
-      post :create, payload: new_pull_request_json
+      post :create, owner: 'mark-rushakoff', repo_name: 'contribot-sandbox', payload: new_pull_request_json
       response.should be_success
     end
 
@@ -26,7 +26,7 @@ describe PullRequestHookController do
       PullRequestCommenter.should_not_receive(:comment_needs_approval)
       PullRequestCommenter.should_not_receive(:comment_approved)
 
-      post :create, payload: payload.to_json
+      post :create, owner: 'mark-rushakoff', repo_name: 'contribot-sandbox', payload: payload.to_json
       response.should be_success
     end
   end
