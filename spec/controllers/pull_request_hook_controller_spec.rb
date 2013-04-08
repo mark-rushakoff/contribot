@@ -10,7 +10,7 @@ describe PullRequestHookController do
 
       # act like checksums match
       OpenSSL::HMAC.stub(hexdigest: 'some_sha1')
-      request.env['X-Hub-Signature'] = 'some_sha1'
+      request.env['X-Hub-Signature'] = 'sha1=some_sha1'
     end
 
     it 'comments with ok to pull when the user is approved' do

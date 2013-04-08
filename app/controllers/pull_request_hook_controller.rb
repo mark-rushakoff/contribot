@@ -4,7 +4,7 @@ class PullRequestHookController < ApplicationController
     render nothing: true and return if watched_repo.nil?
 
     calculated_sha1 = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha1'), watched_repo.secret, request.raw_post)
-    received_sha1 = request.headers['X-Hub-Signature']
+    received_sha1 = request.headers['X-Hub-Signature'].sub(/\A(sha1=)/, '')
     Rails.logger.info("Calculated sha1: #{calculated_sha1}")
     Rails.logger.info("Received sha1: #{received_sha1}")
 
