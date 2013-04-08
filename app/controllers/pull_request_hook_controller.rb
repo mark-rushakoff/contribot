@@ -2,10 +2,16 @@ class PullRequestHookController < ApplicationController
   def create
     watched_repo = WatchedRepo.find_by_owner_and_repo_name(params[:owner], params[:repo_name])
     render nothing: true and return if watched_repo.nil?
+
     calculated_sha1 = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha1'), watched_repo.secret, request.raw_post)
-    Rails.logger.info("Repo secret: #{watched_repo.secret}")
+    received_sha1 = request.headers['X-Hub-Signature']
     Rails.logger.info("Calculated sha1: #{calculated_sha1}")
-    Rails.logger.info("Received sha1: #{request.headers['X-Hub-Signature']}")
+    Rails.logger.info("Received sha1: #{received_sha1}")
+
+    unless calculated_sha1 == received_sha1
+      Rails.logger.error("sha1 discrepancy: received #{received_sha1}, calculated #{calculated_sha1}")
+      render nothing: true and return
+    end
 
     payload = JSON.parse(params[:payload])
 
