@@ -1,6 +1,9 @@
 class PullRequestHookController < ApplicationController
   def create
     payload = JSON.parse(params[:payload])
+
+    render nothing: true and return unless payload['action'] == 'opened'
+
     pull_requester = payload['sender']['login']
     opts = {
       repo: payload['repository']['full_name'],

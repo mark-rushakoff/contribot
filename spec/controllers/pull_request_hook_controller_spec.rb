@@ -17,5 +17,17 @@ describe PullRequestHookController do
       post :create, payload: new_pull_request_json
       response.should be_success
     end
+
+    it 'does nothing if the action is not "opened"' do
+      payload = JSON.parse(new_pull_request_json)
+      payload['action'] = 'closed'
+
+      GithubUser.should_not_receive(:approved?)
+      PullRequestCommenter.should_not_receive(:comment_needs_approval)
+      PullRequestCommenter.should_not_receive(:comment_approved)
+
+      post :create, payload: payload.to_json
+      response.should be_success
+    end
   end
 end
