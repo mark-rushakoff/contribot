@@ -36,6 +36,7 @@ From the command line, you can run:
 
 ## Similar Projects
 
+* [dredd](https://github.com/xoebus/dredd)
 * [clabot](https://github.com/clabot/clabot)
 
 ## Contributing
